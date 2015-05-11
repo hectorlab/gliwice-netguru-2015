@@ -1,5 +1,5 @@
 # Bartosz Kołodziej
-https://netguru-gliwice-2015.herokuapp.com/
+# https://netguru-gliwice-2015.herokuapp.com/
 
 
 # Workshops application
