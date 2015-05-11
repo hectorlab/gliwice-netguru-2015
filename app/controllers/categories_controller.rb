@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :create]
-  
+  before_action :check_admin, only: [:new, :edit, :update, :create]
+
   expose(:categories)
   expose(:category)
   expose(:product) { Product.new }
@@ -44,4 +45,9 @@ class CategoriesController < ApplicationController
     def category_params
       params.require(:category).permit(:name)
     end
+
+  def check_admin
+    return if current_user.try(:admin?)
+    redirect_to new_user_session_path, notice: 'You must be logged in to have acess'
+  end
 end

@@ -1,0 +1,48 @@
+.container 
+  %div.row
+    %div.col-lg-3
+      %div.media-body
+        %h4.media-heading
+          = current_user.firstname
+          = current_user.lastname
+        %h5
+          .glyphicon.glyphicon-envelope
+          = current_user.email
+
+    %div.col-lg-9
+      %h4 User Products:
+      %table.table.table-striped
+        %tr
+          %th Product name
+          %th Description
+          %th Price
+          %th.col-lg-3
+        - current_user.products.each do |product|
+          %tr
+            %td= product.title
+            %td= product.description
+            %td= product.price
+            %td
+              = link_to 'Show', category_product_path(product.category, product), class: "btn btn-info btn-xs"
+              = link_to 'Edit', edit_category_product_path(product.category, product), class: "btn btn-warning btn-xs"
+              = link_to 'Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?'},class: "btn btn-danger btn-xs"
+
+.container
+  .div.col-lg-3
+  .div.col-lg-9
+    %h4 User Reviews:
+    %table.table.table-striped
+      %tr
+        %th Product
+        %th Review
+        %th Rating
+        %th Date
+      - current_user.reviews.last(5).reverse.each do |review|
+        %tr
+          %td= review.product.title
+          %td= review.content
+          %td
+            .span.badge= review.rating
+          %td= review.created_at.strftime("%d-%m-%Y")
+
+

@@ -1,3 +1,4 @@
+
 !!!
 %html{ lang: 'en' }
   %head
@@ -14,8 +15,22 @@
         .navbar-header
           %span.navbar-brand #{AppConfig.workshops_name}
         %p.navbar-text.navbar-right
-          Links should go here
+          - if user_signed_in?
+            Logged in as
+            %strong= link_to "#{current_user.firstname} #{current_user.lastname}", current_user
+            |
+            = link_to('Edit Profile', edit_user_registration_path) 
+            |
+            = link_to('Logout', destroy_user_session_path,  :method=>'delete')
+          - else
+            = link_to "Sign up", new_user_registration_path, :class => 'navbar-link' 
+            |
+            \#{link_to "Login", new_user_session_path, :class => 'navbar-link'}
     .container-fluid
       .row
         .col-lg-12
+          - if notice
+            %p.alert.alert-success= notice
+          - if alert
+            %p.alert.alert-danger= alert
           = yield

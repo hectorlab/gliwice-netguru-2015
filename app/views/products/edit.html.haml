@@ -1,7 +1,9 @@
-%h1 Editing product
+.row
+  .col-md-4.col-md-offset-4
+	%h1 Editing product
 
-= render 'form'
+	= render 'form'
 
-= link_to 'Show', category_product_path(category, product)
-\|
-= link_to 'Back', category_path(category)
+	= link_to 'Show', category_product_path(category, product)
+	\|
+	= link_to 'Back', category_path(category)
